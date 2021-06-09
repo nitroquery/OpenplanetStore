@@ -5,19 +5,12 @@ namespace Store {
     }
     void InstalledPlugins(Manager@ manager) {
       UI::BeginChild("Installed");
-      // Store banner
-      vec2 bannersize = manager.Assets.GetTexture("store-banner").GetSize();
-      float bannerscale = UI::GetWindowSize().x / bannersize.x;
-      bannersize.x = UI::GetWindowSize().x;
-      bannersize.y = bannersize.y * bannerscale;
-      UI::Image(manager.Assets.GetTexture("store-banner"), bannersize);
-
-      // Store banner
-      vec2 ibannersize = manager.Assets.GetTexture("installed-banner").GetSize();
-      float ibannerscale = UI::GetWindowSize().x / ibannersize.x;
-      ibannersize.x = UI::GetWindowSize().x;
-      ibannersize.y = ibannersize.y * ibannerscale;
-      UI::Image(manager.Assets.GetTexture("installed-banner"), ibannersize);
+      // installed banner
+      vec2 titlesize = manager.Assets.GetTexture("title-installed").GetSize();
+      float titlescale = UI::GetWindowSize().x / titlesize.x;
+      titlesize.x = UI::GetWindowSize().x;
+      titlesize.y = titlesize.y * titlescale;
+      UI::Image(manager.Assets.GetTexture("title-installed"), titlesize);
 
       if (UI::BeginTable("Installed Plugins", 4, UI::TableColumnFlags::WidthStretch)) {
         UI::TableNextRow();
@@ -34,6 +27,13 @@ namespace Store {
 
     void UnstablePlugins(Manager@ manager) {
       UI::BeginChild("Unstable");
+
+      vec2 titlesize = manager.Assets.GetTexture("title-unstable").GetSize();
+      float titlescale = UI::GetWindowSize().x / titlesize.x;
+      titlesize.x = UI::GetWindowSize().x;
+      titlesize.y = titlesize.y * titlescale;
+      UI::Image(manager.Assets.GetTexture("title-unstable"), titlesize);
+
       if (UI::BeginTable("Unstable Plugins", 4, UI::TableColumnFlags::WidthStretch)) {
         UI::TableNextRow();
         for (uint i = 0; i < manager.Plugins.Length; i++) {
@@ -46,39 +46,19 @@ namespace Store {
       UI::EndChild();
     }
 
-    // Render store main view
-    void Home(Manager@ manager) {
-      UI::BeginChild("Store");
+    void All(Manager@ manager) {
+      UI::BeginChild("All");
       if (LOADING) {
         UI::Text("loading available plugins...");
         UI::EndChild();
         return;
       }
-
-      // Featured plugins
-      vec2 fbannersize = manager.Assets.GetTexture("featured-banner").GetSize();
-      float fbannerscale = UI::GetWindowSize().x / fbannersize.x;
-      fbannersize.x = UI::GetWindowSize().x;
-      fbannersize.y = fbannersize.y * fbannerscale;
-      UI::Image(manager.Assets.GetTexture("featured-banner"), fbannersize);
-
-      if (UI::BeginTable("FeaturedPlugins", 4, UI::TableColumnFlags::WidthStretch)) {
-        UI::TableNextRow();
-        for (uint i = 0; i < manager.Plugins.Length; i++) {
-          if (manager.Plugins[i].Featured) {
-            UI::TableNextColumn();
-            this.PluginCard(manager, manager.Plugins[i]);
-          }
-        }
-        UI::EndTable();
-      }
-
       // Plugin list page
-      vec2 abannersize = manager.Assets.GetTexture("all-banner").GetSize();
-      float abannerscale = UI::GetWindowSize().x / abannersize.x;
-      abannersize.x = UI::GetWindowSize().x;
-      abannersize.y = abannersize.y * abannerscale;
-      UI::Image(manager.Assets.GetTexture("all-banner"), abannersize);
+      vec2 titlesize = manager.Assets.GetTexture("title-all").GetSize();
+      float titlescale = UI::GetWindowSize().x / titlesize.x;
+      titlesize.x = UI::GetWindowSize().x;
+      titlesize.y = titlesize.y * titlescale;
+      UI::Image(manager.Assets.GetTexture("title-all"), titlesize);
 
       float pages = Math::Ceil((manager.Plugins.Length * 3.6f) / (ITEMS_PER_PAGE  * 3.6f));
       if (UI::BeginTable("Plugins", 4, UI::TableColumnFlags::WidthStretch | UI::TableColumnFlags::NoResize)) {
@@ -109,6 +89,36 @@ namespace Store {
       UI::EndChild();
     }
 
+    // Render store main view
+    void Home(Manager@ manager) {
+      UI::BeginChild("Home");
+      if (LOADING) {
+        UI::Text("loading available plugins...");
+        UI::EndChild();
+        return;
+      }
+
+      // Featured plugins
+      vec2 titlesize = manager.Assets.GetTexture("title-featured").GetSize();
+      float titlescale = UI::GetWindowSize().x / titlesize.x;
+      titlesize.x = UI::GetWindowSize().x;
+      titlesize.y = titlesize.y * titlescale;
+      UI::Image(manager.Assets.GetTexture("title-featured"), titlesize);
+
+      if (UI::BeginTable("FeaturedPlugins", 4, UI::TableColumnFlags::WidthStretch)) {
+        UI::TableNextRow();
+        for (uint i = 0; i < manager.Plugins.Length; i++) {
+          if (manager.Plugins[i].Featured) {
+            UI::TableNextColumn();
+            this.PluginCard(manager, manager.Plugins[i]);
+          }
+        }
+        UI::EndTable();
+      }
+
+      UI::EndChild();
+    }
+
     // Render plugin card
     void PluginCard(Manager@ manager, Store::Plugin@ plugin) {
       vec2 thumbsize = manager.Assets.GetTexture("no-thumb").GetSize();
@@ -121,7 +131,7 @@ namespace Store {
       UI::PushID("details-btn" + plugin.SiteID + plugin.Name);
       if (UI::Button(Icons::Eye + " Details")) {
         @manager.selected = plugin;
-        CURRENT_VIEW = 2;
+        CURRENT_VIEW = 4;
       }
       if (plugin.Installed) {
         UI::SameLine();

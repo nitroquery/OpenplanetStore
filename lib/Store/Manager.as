@@ -45,7 +45,7 @@ namespace Store {
         bannersize.x = UI::GetWindowSize().x;
         bannersize.y = bannersize.y * bannerscale;
         UI::Image(manager.Assets.GetTexture("store-banner"), bannersize);
-        
+
         UI::BeginTabBar("Plugin Store", UI::TabBarFlags::FittingPolicyResizeDown);
         UI::PushStyleColor(UI::Col::Tab, vec4(0, 0, 0, 1));
         UI::PushStyleColor(UI::Col::TabHovered, vec4(1, 0.50, 0.75, 1));
@@ -57,14 +57,20 @@ namespace Store {
 
 
 
-        if (UI::BeginTabItem("Store")) {
+        if (UI::BeginTabItem("Home")) {
           CURRENT_VIEW = 0;
           this.Layout.Home(this);
           UI::EndTabItem();
         }
 
-        if (UI::BeginTabItem("Installed")) {
+        if (UI::BeginTabItem("All")) {
           CURRENT_VIEW = 1;
+          this.Layout.All(this);
+          UI::EndTabItem();
+        }
+
+        if (UI::BeginTabItem("Installed")) {
+          CURRENT_VIEW = 2;
           this.Layout.InstalledPlugins(this);
           UI::EndTabItem();
         }
@@ -75,7 +81,7 @@ namespace Store {
           UI::EndTabItem();
         }
 
-        if (CURRENT_VIEW == 2 && this.selected !is null) {
+        if (CURRENT_VIEW == 4 && this.selected !is null) {
           if (UI::BeginTabItem(this.selected.Name, UI::TabItemFlags::SetSelected)) {
             this.Layout.Details(this);
             UI::EndTabItem();

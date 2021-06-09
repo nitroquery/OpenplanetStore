@@ -6,9 +6,10 @@ namespace Store {
     AssetManager() {
       this.LoadTexture("no-thumb", "assets/images/no-thumb.jpg");
       this.LoadTexture("store-banner", "assets/images/store-banner.jpg");
-      this.LoadTexture("featured-banner", "assets/images/featured-banner.jpg");
-      this.LoadTexture("installed-banner", "assets/images/installed-banner.jpg");
-      this.LoadTexture("all-banner", "assets/images/all-banner.jpg");
+      this.LoadTexture("title-all", "assets/images/title-all.png");
+      this.LoadTexture("title-featured", "assets/images/title-featured.png");
+      this.LoadTexture("title-installed", "assets/images/title-installed.png");
+      this.LoadTexture("title-unstable", "assets/images/title-unstable.png");
     }
 
     // Load texture from path and register loaded texture by given key.
