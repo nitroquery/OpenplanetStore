@@ -82,7 +82,7 @@ namespace Store {
         }
 
         if (CURRENT_VIEW == 4 && this.selected !is null) {
-          if (UI::BeginTabItem(this.selected.Name, UI::TabItemFlags::SetSelected)) {
+          if (UI::BeginTabItem("Plugin: " + this.selected.Name, UI::TabItemFlags::SetSelected)) {
             this.Layout.Details(this);
             UI::EndTabItem();
           }

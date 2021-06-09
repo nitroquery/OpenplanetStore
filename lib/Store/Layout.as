@@ -150,7 +150,7 @@ namespace Store {
       if (manager.selected is null) {
         return;
       }
-      UI::BeginChild(manager.selected.Name);
+      UI::BeginChild("Plugin: " + manager.selected.Name);
       if (UI::BeginTable("DetailsView", 2, UI::TableFlags::NoBordersInBody | UI::TableFlags::SizingStretchProp)) {
         // Left aside
         UI::TableSetupColumn("aside", UI::TableColumnFlags::WidthFixed, UI::GetWindowSize().x / 4);
