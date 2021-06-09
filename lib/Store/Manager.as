@@ -39,6 +39,13 @@ namespace Store {
         UI::SetWindowSize(vec2(Draw::GetWidth() * 0.8, Draw::GetHeight() * 0.8));
         UI::SetWindowPos(vec2(Draw::GetWidth() * 0.1, Draw::GetHeight() * 0.1));
 
+        // Store banner
+        vec2 bannersize = manager.Assets.GetTexture("store-banner").GetSize();
+        float bannerscale = UI::GetWindowSize().x / bannersize.x;
+        bannersize.x = UI::GetWindowSize().x;
+        bannersize.y = bannersize.y * bannerscale;
+        UI::Image(manager.Assets.GetTexture("store-banner"), bannersize);
+        
         UI::BeginTabBar("Plugin Store", UI::TabBarFlags::FittingPolicyResizeDown);
         UI::PushStyleColor(UI::Col::Tab, vec4(0, 0, 0, 1));
         UI::PushStyleColor(UI::Col::TabHovered, vec4(1, 0.50, 0.75, 1));
@@ -47,6 +54,8 @@ namespace Store {
         UI::PushStyleColor(UI::Col::Button, vec4(1, 0.2, 0.6, 1));
         UI::PushStyleColor(UI::Col::ButtonHovered, vec4(1, 0.50, 0.75, 1));
         UI::PushStyleColor(UI::Col::ButtonActive, vec4(1, 0.50, 0.75, 1));
+
+
 
         if (UI::BeginTabItem("Store")) {
           CURRENT_VIEW = 0;

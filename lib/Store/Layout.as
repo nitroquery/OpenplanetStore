@@ -55,13 +55,6 @@ namespace Store {
         return;
       }
 
-      // Store banner
-      vec2 bannersize = manager.Assets.GetTexture("store-banner").GetSize();
-      float bannerscale = UI::GetWindowSize().x / bannersize.x;
-      bannersize.x = UI::GetWindowSize().x;
-      bannersize.y = bannersize.y * bannerscale;
-      UI::Image(manager.Assets.GetTexture("store-banner"), bannersize);
-
       // Featured plugins
       vec2 fbannersize = manager.Assets.GetTexture("featured-banner").GetSize();
       float fbannerscale = UI::GetWindowSize().x / fbannersize.x;
