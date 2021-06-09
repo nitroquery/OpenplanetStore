@@ -13,7 +13,7 @@ namespace Store {
     bool Installed;
     bool Unstable;
 
-    Meta::Plugin@ local;
+    /* Meta::Plugin@ local; */
 
     // Status
     // 0 = none
@@ -29,7 +29,7 @@ namespace Store {
       Author = plugin.Author;
       Version = Semver::Version(plugin.Version);
       Installed = true;
-      @local = plugin;
+      /* @local = plugin; */
     }
 
     Plugin(Json::Value data) {
@@ -45,11 +45,19 @@ namespace Store {
     }
 
     bool UpdateAvailable() {
+      Meta::Plugin@[]@ installed = Meta::AllPlugins();
+      Meta::Plugin@ iplugin;
+      for (uint i2 = 0; i2 < installed.Length; i2++) {
+        if (installed[i2].Name == this.Name) {
+          /* Meta::UnloadPlugin(installed[i2]); */
+          @iplugin = installed[i2];
+        }
+      }
       // If plugin is not installed then return true
-      if (local is null) return false;
+      if (iplugin is null) return false;
 
       /* return (Semver::Version(plugin.Version) > this.Version); */
-      return (this.Version > Semver::Version(local.Version));
+      return (this.Version > Semver::Version(iplugin.Version));
     }
 
     bool Busy() {
@@ -81,30 +89,42 @@ namespace Store {
     }
 
     void Uninstall() {
-      if (this.Busy()) return;
+      Meta::Plugin@[]@ installed = Meta::AllPlugins();
+      Meta::Plugin@ iplugin;
+      for (uint i2 = 0; i2 < installed.Length; i2++) {
+        if (installed[i2].Name == this.Name) {
+          /* Meta::UnloadPlugin(installed[i2]); */
+          @iplugin = installed[i2];
+        }
+      }
+      // If plugin is not installed then return true
+      if (this.Busy() || iplugin is null) return;
 
       this.status = 4;
       print(this.Status() + " " + this.Name);
-      if (this.local.Source != Meta::PluginSource::UserFolder) {
+      if (iplugin.Source != Meta::PluginSource::UserFolder) {
         this.msg = "can only uninstall from user UserFolder";
         return;
       }
       // 1. Disable the plugin
-      if (this.local.Enabled) {
-        this.local.Disable();
+      if (iplugin.Enabled) {
+        iplugin.Disable();
       }
-
-      // 2. Unload plugin
-      /* Meta::UnloadPlugin(this.local); */
 
       // 3. Delete plugin files | zip
-      if (IO::FolderExists(this.local.SourcePath)) {
-        string[]@ paths = IO::IndexFolder(this.local.SourcePath, true);
+      /* if (IO::FolderExists(iplugin.SourcePath)) {
+        string[]@ paths = IO::IndexFolder(iplugin.SourcePath, true);
         for (uint i = 0; i < paths.Length; i++) {
           this.msg = "removing: " + paths[i];
-          /* IO::Delete(paths[i]); */
+          IO::Delete(paths[i]);
         }
-      }
+      } */
+
+      this.Installed = false;
+      // 2. Unload plugin
+
+      Meta::UnloadPlugin(iplugin);
+
       this.msg = "";
       this.status = 0;
     }

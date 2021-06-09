@@ -195,7 +195,7 @@ namespace Store {
           UI::Text("Version:");
           UI::TableNextColumn();
           if (manager.selected.Installed) {
-            UI::Text(manager.selected.local.Version);
+            UI::Text(manager.selected.Version.String()); // get installed v
           } else {
             UI::Text(manager.selected.Version.String());
           }

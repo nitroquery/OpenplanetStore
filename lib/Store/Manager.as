@@ -55,8 +55,6 @@ namespace Store {
         UI::PushStyleColor(UI::Col::ButtonHovered, vec4(1, 0.50, 0.75, 1));
         UI::PushStyleColor(UI::Col::ButtonActive, vec4(1, 0.50, 0.75, 1));
 
-
-
         if (UI::BeginTabItem("Home")) {
           CURRENT_VIEW = 0;
           this.Layout.Home(this);

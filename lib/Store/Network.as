@@ -12,7 +12,7 @@ namespace Store {
       for (uint i = 0; i < plugins.Length; i++) {
         for (uint i2 = 0; i2 < installed.Length; i2++) {
           if (installed[i2].SiteID == plugins[i].SiteID && !installed[i2].Unstable) {
-            @plugins[i].local = installed[i2];
+            /* @plugins[i].local = installed[i2]; */
             plugins[i].Installed = true;
             installed.RemoveAt(i2);
           }
