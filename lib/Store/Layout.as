@@ -160,30 +160,30 @@ namespace Store {
         thumbsize /= thumbsize.x / 256;
         UI::Image(manager.Assets.GetTexture("no-thumb"), thumbsize);
 
-        if (manager.selected.local !is null && manager.selected.local.Type == Meta::PluginType::Legacy) {
+        /* if (manager.selected.local !is null && manager.selected.local.Type == Meta::PluginType::Legacy) {
           UI::Separator();
           UI::Text("Legacy plugins are not supported!");
           UI::Separator();
-        } else {
-          // Show actions only if there is no pending action
-          if (!manager.selected.Busy()) {
-            if (manager.selected.Installed) {
-              if (manager.selected.UpdateAvailable()) {
-                UI::PushStyleColor(UI::Col::Button, vec4(0.867,0.733,0.467,1));
-                UI::Button("Get " + manager.selected.Version.String());
-                UI::PopStyleColor();
-                UI::SameLine();
-              }
-              UI::PushStyleColor(UI::Col::Button, vec4(1,0,0,1));
-              if (UI::Button("Uninstall")) {
-                  manager.selected.Uninstall();
-              }
+        } */
 
+        // Show actions only if there is no pending action
+        if (!manager.selected.Busy()) {
+          if (manager.selected.Installed) {
+            if (manager.selected.UpdateAvailable()) {
+              UI::PushStyleColor(UI::Col::Button, vec4(0.867,0.733,0.467,1));
+              UI::Button("Get " + manager.selected.Version.String());
               UI::PopStyleColor();
-            } else {
-              if (UI::Button("Install")) {
-                manager.selected.Install();
-              }
+              UI::SameLine();
+            }
+            UI::PushStyleColor(UI::Col::Button, vec4(1,0,0,1));
+            if (UI::Button("Uninstall")) {
+                manager.selected.Uninstall();
+            }
+
+            UI::PopStyleColor();
+          } else {
+            if (UI::Button("Install")) {
+              manager.selected.Install();
             }
           }
         }
