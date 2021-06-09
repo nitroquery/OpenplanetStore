@@ -1,1 +1,1 @@
-# PluginStore
+# Plugin Store
