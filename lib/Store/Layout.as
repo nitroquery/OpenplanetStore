@@ -6,18 +6,18 @@ namespace Store {
     void InstalledPlugins(Manager@ manager) {
       UI::BeginChild("Installed");
       // Store banner
-      vec2 bannersize = manager.Assets.Get("store-banner").GetSize();
+      vec2 bannersize = manager.Assets.GetTexture("store-banner").GetSize();
       float bannerscale = UI::GetWindowSize().x / bannersize.x;
       bannersize.x = UI::GetWindowSize().x;
       bannersize.y = bannersize.y * bannerscale;
-      UI::Image(manager.Assets.Get("store-banner"), bannersize);
+      UI::Image(manager.Assets.GetTexture("store-banner"), bannersize);
 
       // Store banner
-      vec2 ibannersize = manager.Assets.Get("installed-banner").GetSize();
+      vec2 ibannersize = manager.Assets.GetTexture("installed-banner").GetSize();
       float ibannerscale = UI::GetWindowSize().x / ibannersize.x;
       ibannersize.x = UI::GetWindowSize().x;
       ibannersize.y = ibannersize.y * ibannerscale;
-      UI::Image(manager.Assets.Get("installed-banner"), ibannersize);
+      UI::Image(manager.Assets.GetTexture("installed-banner"), ibannersize);
 
       if (UI::BeginTable("Installed Plugins", 4, UI::TableColumnFlags::WidthStretch)) {
         UI::TableNextRow();
@@ -56,18 +56,18 @@ namespace Store {
       }
 
       // Store banner
-      vec2 bannersize = manager.Assets.Get("store-banner").GetSize();
+      vec2 bannersize = manager.Assets.GetTexture("store-banner").GetSize();
       float bannerscale = UI::GetWindowSize().x / bannersize.x;
       bannersize.x = UI::GetWindowSize().x;
       bannersize.y = bannersize.y * bannerscale;
-      UI::Image(manager.Assets.Get("store-banner"), bannersize);
+      UI::Image(manager.Assets.GetTexture("store-banner"), bannersize);
 
       // Featured plugins
-      vec2 fbannersize = manager.Assets.Get("featured-banner").GetSize();
+      vec2 fbannersize = manager.Assets.GetTexture("featured-banner").GetSize();
       float fbannerscale = UI::GetWindowSize().x / fbannersize.x;
       fbannersize.x = UI::GetWindowSize().x;
       fbannersize.y = fbannersize.y * fbannerscale;
-      UI::Image(manager.Assets.Get("featured-banner"), fbannersize);
+      UI::Image(manager.Assets.GetTexture("featured-banner"), fbannersize);
 
       if (UI::BeginTable("FeaturedPlugins", 4, UI::TableColumnFlags::WidthStretch)) {
         UI::TableNextRow();
@@ -81,11 +81,11 @@ namespace Store {
       }
 
       // Plugin list page
-      vec2 abannersize = manager.Assets.Get("all-banner").GetSize();
+      vec2 abannersize = manager.Assets.GetTexture("all-banner").GetSize();
       float abannerscale = UI::GetWindowSize().x / abannersize.x;
       abannersize.x = UI::GetWindowSize().x;
       abannersize.y = abannersize.y * abannerscale;
-      UI::Image(manager.Assets.Get("all-banner"), abannersize);
+      UI::Image(manager.Assets.GetTexture("all-banner"), abannersize);
 
       float pages = Math::Ceil((manager.Plugins.Length * 3.6f) / (ITEMS_PER_PAGE  * 3.6f));
       if (UI::BeginTable("Plugins", 4, UI::TableColumnFlags::WidthStretch | UI::TableColumnFlags::NoResize)) {
@@ -118,9 +118,9 @@ namespace Store {
 
     // Render plugin card
     void PluginCard(Manager@ manager, Store::Plugin@ plugin) {
-      vec2 thumbsize = manager.Assets.Get("no-thumb").GetSize();
+      vec2 thumbsize = manager.Assets.GetTexture("no-thumb").GetSize();
       thumbsize /= thumbsize.x / 256;
-      UI::Image(manager.Assets.Get("no-thumb"), thumbsize);
+      UI::Image(manager.Assets.GetTexture("no-thumb"), thumbsize);
       string titleColor = "";
       UI::Text(titleColor + plugin.Name + "\\$777 - v" + plugin.Version.String());
       UI::Text("by " + ColoredString(plugin.Author));
@@ -153,9 +153,9 @@ namespace Store {
         UI::TableSetupColumn("aside", UI::TableColumnFlags::WidthFixed, UI::GetWindowSize().x / 4);
         UI::TableNextRow();
         UI::TableSetColumnIndex(0);
-        vec2 thumbsize = manager.Assets.Get("no-thumb").GetSize();
+        vec2 thumbsize = manager.Assets.GetTexture("no-thumb").GetSize();
         thumbsize /= thumbsize.x / 256;
-        UI::Image(manager.Assets.Get("no-thumb"), thumbsize);
+        UI::Image(manager.Assets.GetTexture("no-thumb"), thumbsize);
 
         if (manager.selected.local !is null && manager.selected.local.Type == Meta::PluginType::Legacy) {
           UI::Separator();
