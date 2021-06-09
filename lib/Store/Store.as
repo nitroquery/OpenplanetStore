@@ -2,10 +2,11 @@ namespace Store {
   // STATE_IS_OPEN is store open
   bool STATE_IS_OPEN = false;
   // CURRENT_VIEW
-  // 0. Main Store view page
-  // 1. Installed plugins
-  // 2. Plugin details view
-  // 3. Unstable plugins view
+  // 0. Main Store view
+  // 1. Available plugins view
+  // 2. Installed view
+  // 3. Unstable view
+  // 4. Plugin details view
   uint CURRENT_VIEW = 0;
 
   bool LOADING = true;

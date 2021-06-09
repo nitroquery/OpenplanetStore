@@ -46,8 +46,8 @@ namespace Store {
       UI::EndChild();
     }
 
-    void All(Manager@ manager) {
-      UI::BeginChild("All");
+    void Plugins(Manager@ manager) {
+      UI::BeginChild("Plugins");
       if (LOADING) {
         UI::Text("loading available plugins...");
         UI::EndChild();

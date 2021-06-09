@@ -5,7 +5,7 @@ namespace Store {
 
     AssetManager() {
       this.LoadTexture("no-thumb", "assets/images/no-thumb.jpg");
-      this.LoadTexture("store-banner", "assets/images/store-banner.jpg");
+      this.LoadTexture("store-banner", "assets/images/store-banner.png");
       this.LoadTexture("title-all", "assets/images/title-all.png");
       this.LoadTexture("title-featured", "assets/images/title-featured.png");
       this.LoadTexture("title-installed", "assets/images/title-installed.png");

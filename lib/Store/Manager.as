@@ -35,7 +35,7 @@ namespace Store {
 
     // Render is called everytime when Store plugin RenderInterface is called.
     void Render() {
-      if (UI::Begin(" \\$f39 " + Icons::ShoppingBag + " \\$fff Plugin Store \\$555 v" + plugin.Version + "###", Store::STATE_IS_OPEN, UI::WindowFlags::NoCollapse | UI::WindowFlags::NoMove | UI::WindowFlags::NoResize)) {
+      if (UI::Begin(" \\$f39 " + Icons::ShoppingBag + " \\$fff Openplanet Store \\$555 v" + plugin.Version + "###", Store::STATE_IS_OPEN, UI::WindowFlags::NoCollapse | UI::WindowFlags::NoMove | UI::WindowFlags::NoResize)) {
         UI::SetWindowSize(vec2(Draw::GetWidth() * 0.8, Draw::GetHeight() * 0.8));
         UI::SetWindowPos(vec2(Draw::GetWidth() * 0.1, Draw::GetHeight() * 0.1));
 
@@ -46,7 +46,7 @@ namespace Store {
         bannersize.y = bannersize.y * bannerscale;
         UI::Image(manager.Assets.GetTexture("store-banner"), bannersize);
 
-        UI::BeginTabBar("Plugin Store", UI::TabBarFlags::FittingPolicyResizeDown);
+        UI::BeginTabBar("Openplanet Store", UI::TabBarFlags::FittingPolicyResizeDown);
         UI::PushStyleColor(UI::Col::Tab, vec4(0, 0, 0, 1));
         UI::PushStyleColor(UI::Col::TabHovered, vec4(1, 0.50, 0.75, 1));
         UI::PushStyleColor(UI::Col::TabActive, vec4(1, 0.2, 0.6, 1));
@@ -63,9 +63,9 @@ namespace Store {
           UI::EndTabItem();
         }
 
-        if (UI::BeginTabItem("All")) {
+        if (UI::BeginTabItem("Plugins")) {
           CURRENT_VIEW = 1;
-          this.Layout.All(this);
+          this.Layout.Plugins(this);
           UI::EndTabItem();
         }
 
