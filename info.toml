@@ -1,0 +1,16 @@
+[meta]
+name = "Store"
+author = "NitroQuery"
+category = "General"
+
+# siteid = 103
+version = "0.1.0"
+
+# perms = "paid"
+
+[game]
+min_version = "2020-12-25"
+# max_version = "2021-06-03"
+
+[script]
+imports = [ "Icons.as", "Formatting.as", "Time.as" ]
