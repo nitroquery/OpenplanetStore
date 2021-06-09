@@ -1,3 +1,1 @@
-# Plugin Store
-
-![store-banner](./assets/assets/images/store-banner.jpg)
+![store-banner](assets/images/store-banner.jpg)
