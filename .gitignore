@@ -1,5 +1,6 @@
 *~
 **/*.sw[mnop]
+**/*.dll
 !**/*.gitkeep
 **/[Tt]mp/*
 dist/*

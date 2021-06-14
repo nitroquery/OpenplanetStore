@@ -1,4 +1,4 @@
-namespace Store {
+namespace OpenplanetStore {
   // AssetManager is managing all local and remote resources.
   class AssetManager {
     dictionary res;
@@ -6,10 +6,9 @@ namespace Store {
     AssetManager() {
       this.LoadTexture("no-thumb", "assets/images/no-thumb.jpg");
       this.LoadTexture("store-banner", "assets/images/store-banner.png");
-      this.LoadTexture("title-all", "assets/images/title-all.png");
+      this.LoadTexture("store-loading", "assets/images/store-loading.png");
       this.LoadTexture("title-featured", "assets/images/title-featured.png");
-      this.LoadTexture("title-installed", "assets/images/title-installed.png");
-      this.LoadTexture("title-unstable", "assets/images/title-unstable.png");
+      this.LoadTexture("title-plugins", "assets/images/title-plugins.png");
     }
 
     // Load texture from path and register loaded texture by given key.
@@ -19,11 +18,11 @@ namespace Store {
 
     // Get Texture by given key or return default texture if key is not found.
     Resources::Texture@ GetTexture(string key) {
-      Resources::Texture@ t = cast<Resources::Texture@>(res[key]);
-      if (t is null) {
+      if (res.Exists(key)) {
+        return cast<Resources::Texture@>(res[key]);
+      } else {
         return cast<Resources::Texture@>(res['no-thumb']);
       }
-      return t;
     }
   }
 }

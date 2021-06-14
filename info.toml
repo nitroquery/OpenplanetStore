@@ -1,10 +1,10 @@
 [meta]
-name = "Store"
+name = "Openplanet Store"
 author = "NitroQuery"
 category = "General"
 
 # siteid = 103
-version = "0.1.0"
+version = "1.0.0-alpha.1"
 
 # perms = "paid"
 
@@ -13,4 +13,8 @@ min_version = "2020-12-25"
 # max_version = "2021-06-03"
 
 [script]
-imports = [ "Icons.as", "Formatting.as", "Time.as" ]
+imports = [
+  "Icons.as",
+  "Formatting.as",
+  "Time.as"
+]
